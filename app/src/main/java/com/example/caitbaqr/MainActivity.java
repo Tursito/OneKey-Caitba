@@ -3,22 +3,31 @@ package com.example.caitbaqr;
 
 
 
+import static java.security.AccessController.getContext;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.google.zxing.BarcodeFormat;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 
+import java.security.AccessController;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -26,9 +35,8 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity {
 
 
-    long ahora =System.currentTimeMillis();
     String deviceID;
-
+    private AccessController view;
 
 
     @Override
@@ -37,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //Recogemos el AID (solo una vez)
         deviceID = Settings.Secure.getString(this.getContentResolver(),Settings.Secure.ANDROID_ID);
+
+
 
 
         //Pasar a la actividad de formulario
@@ -58,6 +68,36 @@ public class MainActivity extends AppCompatActivity {
         myThread.start();
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    private void getMenuInflater(int main_menu, Menu menu) {
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.config:
+                Toast toast = Toast.makeText(getApplicationContext(),"config",Toast.LENGTH_LONG);
+                toast.show();
+                return true;
+            case R.id.ubi:
+                //Ir a ubicaciones.class (hay que crearlo)
+
+                Toast toast2 = Toast.makeText(getApplicationContext(),"ubicaciones",Toast.LENGTH_LONG);
+                toast2.show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
     //En el hilo estaremos actualizando la fecha y hora constantemente, al hacer esto
     //La imagen QR también se actualiza
     public void doWork() {
