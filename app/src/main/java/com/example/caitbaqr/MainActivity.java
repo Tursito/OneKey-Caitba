@@ -83,12 +83,19 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.config:
+                //Ir a la actividad de form.class
+                Intent myIntent = new Intent(getApplicationContext(), form.class);
+                startActivityForResult(myIntent, 0);
+                //Borrar
                 Toast toast = Toast.makeText(getApplicationContext(),"config",Toast.LENGTH_LONG);
                 toast.show();
                 return true;
             case R.id.ubi:
-                //Ir a ubicaciones.class (hay que crearlo)
+                //Ir a ubications.class (hay que crearlo)
+                //Intent myIntent = new Intent(getApplicationContext(), ubications.class);
+                //startActivityForResult(myIntent, 0);
 
+                //Borrar
                 Toast toast2 = Toast.makeText(getApplicationContext(),"ubicaciones",Toast.LENGTH_LONG);
                 toast2.show();
                 return true;
