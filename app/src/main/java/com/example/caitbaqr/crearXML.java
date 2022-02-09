@@ -1,6 +1,6 @@
 package com.example.caitbaqr;
 
-import android.widget.Toast;
+import android.content.Context;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -134,7 +134,9 @@ public class crearXML {
 
     }
 
-    public void httpsRequest(String URL,String datos) throws IOException {
+
+
+    public void httpsRequest(String URL, String datos) throws IOException {
         java.net.URL url = new URL(URL);
 
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -164,6 +166,10 @@ public class crearXML {
         String respuesta = response.toString();
 
 
+
     }
+
+
+
 
 }
