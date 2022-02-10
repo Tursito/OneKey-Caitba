@@ -1,7 +1,6 @@
-# CaitbaQR
-Código QR para Caitba
-
+# OneKey
+OneKey para CAITBA
 
 Version 1.0 
 
-Método POST creado y menu para la AppBar
+
