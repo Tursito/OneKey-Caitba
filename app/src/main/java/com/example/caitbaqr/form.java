@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,11 +29,13 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 
 public class form extends AppCompatActivity {
 
-    LinearLayout layout;
+    RelativeLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +44,6 @@ public class form extends AppCompatActivity {
 
 
         String deviceID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
-
         layout = findViewById(R.id.form_main);
 
 
@@ -50,6 +52,7 @@ public class form extends AppCompatActivity {
         enviar.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
+              //Recogemos la información del formulario
                   EditText nombreForm = findViewById(R.id.nombre);
                   String nombre = nombreForm.getText().toString();
                   EditText telefonoForm = findViewById(R.id.telefono);
@@ -59,7 +62,7 @@ public class form extends AppCompatActivity {
                   String licencia = "F672D1E5-52CD-470A-BC10-B8609D7E509D";
 
 
-
+//Clase asíncrona para la conexión con la API
               class AsyncT extends AsyncTask<Void,Void,Void>{
 
                   @Override
@@ -226,6 +229,7 @@ public class form extends AppCompatActivity {
 
 
     }
+
 
 }
 

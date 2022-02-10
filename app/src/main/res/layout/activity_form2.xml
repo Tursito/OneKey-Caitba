@@ -1,97 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".form"
     android:orientation="vertical"
-    android:id="@+id/form_main"
-    >
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Configuración"
-        android:padding="10dp"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Nombre:"
-        android:padding="10dp"
-        />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/nombre"
-        android:padding="10dp"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Teléfono:"
-        android:padding="10dp"
-        />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/telefono"
-        android:padding="10dp"
-        />
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Licencia:"
-        android:padding="10dp"
-        />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/licencia"
-        android:padding="10dp"
-        android:layout_marginBottom="20dp"
-        />
-
-    <Button
-        android:id="@+id/enviar"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:padding="30dp"
-        app:icon="@android:drawable/ic_menu_send" />
-
-
-    <Button
-        android:id="@+id/volver"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:padding="30dp"
-        app:icon="@drawable/abc_vector_test" />
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/respuesta"
-        android:padding="10dp"
-        />
-
-    <ImageView
-        android:id="@+id/imageView"
+    android:id="@+id/form_main">
+    <RelativeLayout
+        android:id="@+id/footer"
         android:layout_width="match_parent"
         android:layout_height="57dp"
-        android:layout_marginTop="10dp"
-        app:srcCompat="@drawable/prueba1"
-        android:adjustViewBounds="true"/>
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/prueba1"
+        android:gravity="center"
+        android:layout_gravity="center">
+    </RelativeLayout>
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/footer"
+        android:fillViewport="true">
+        <LinearLayout
+            android:id="@+id/myLayout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:fillViewport="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Configuración"
+                android:padding="10dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nombre:"
+                android:padding="10dp"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/nombre"
+                android:padding="10dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Teléfono:"
+                android:padding="10dp"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/telefono"
+                android:padding="10dp"
+                />
 
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Licencia:"
+                android:padding="10dp"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/licencia"
+                android:padding="10dp"
+                android:layout_marginBottom="20dp"
+                />
+
+            <Button
+                android:id="@+id/enviar"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:padding="30dp"
+                android:background="@android:drawable/ic_menu_send" />
 
 
-</LinearLayout>
+            <Button
+                android:id="@+id/volver"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:padding="30dp"
+                android:background="@drawable/abc_vector_test" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/respuesta"
+                android:padding="10dp"
+                />
+
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

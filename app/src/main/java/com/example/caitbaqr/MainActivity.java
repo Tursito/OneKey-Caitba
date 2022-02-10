@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     String deviceID;
-    private AccessController view;
+
 
 
     @Override
@@ -46,22 +46,8 @@ public class MainActivity extends AppCompatActivity {
         //Recogemos el AID (solo una vez)
         deviceID = Settings.Secure.getString(this.getContentResolver(),Settings.Secure.ANDROID_ID);
 
-
-
-
-        //Pasar a la actividad de formulario
-        Button pasarForm = findViewById(R.id.pasarForm);
-        pasarForm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), form.class);
-                startActivityForResult(intent, 0);
-            }
-        });
-
-
-
         //Creamos el hilo y le asignamos una clase.
+        //Este hilo se usa para el QR.
         Thread myThread = null;
         Runnable runnable = new CountDownRunner();
         myThread= new Thread(runnable);
@@ -86,18 +72,16 @@ public class MainActivity extends AppCompatActivity {
                 //Ir a la actividad de form.class
                 Intent myIntent = new Intent(getApplicationContext(), form.class);
                 startActivityForResult(myIntent, 0);
-                //Borrar
-                Toast toast = Toast.makeText(getApplicationContext(),"config",Toast.LENGTH_LONG);
-                toast.show();
                 return true;
             case R.id.ubi:
-                //Ir a ubications.class (hay que crearlo)
-                //Intent myIntent = new Intent(getApplicationContext(), ubications.class);
-                //startActivityForResult(myIntent, 0);
+                //Ir a activity_location.class
 
-                //Borrar
-                Toast toast2 = Toast.makeText(getApplicationContext(),"ubicaciones",Toast.LENGTH_LONG);
-                toast2.show();
+                Intent myIntent1 = new Intent(getApplicationContext(), activity_location.class);
+                startActivityForResult(myIntent1, 0);
+
+
+
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -112,11 +96,11 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 try{
                     //Fecha y hora
-                    TextView txtCurrentTime= (TextView)findViewById(R.id.textView2);
+
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_hhmmss"), Locale,getDefault;
                     Date date = new Date();
                     String fecha = dateFormat.format(date);
-                    txtCurrentTime.setText(deviceID+fecha);
+
 
                     //QR
                     ImageView imgQr = findViewById(R.id.qrCode);
@@ -128,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     //Clase para activar el código de arriba, cuando se ejecuta espera X milisegundos
     //Y la vuelve a ejecutar hasta interrumpir el hilo
     class CountDownRunner implements Runnable{
@@ -136,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
             while(!Thread.currentThread().isInterrupted()){
                 try {
                     doWork();
-                    Thread.sleep(5000);
+                    Thread.sleep(5000);//Cada 5 segundos recarga el QR.
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }catch(Exception e){

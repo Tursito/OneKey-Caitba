@@ -27,15 +27,23 @@
             android:background="#FFFFFF"
             android:fillViewport="true">
 
-            <ImageView
-                android:layout_marginTop="100dp"
-                android:id="@+id/qrCode"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"/>
+                android:padding="10dp"
+                android:text="Ubicaciones" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="CAITBA:"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="ACCESO ALMACEN" />
 
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
-
-
