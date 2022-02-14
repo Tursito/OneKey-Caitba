@@ -14,13 +14,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -29,8 +24,6 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 
 public class form extends AppCompatActivity {
@@ -66,11 +59,11 @@ public class form extends AppCompatActivity {
               class AsyncT extends AsyncTask<Void,Void,Void>{
 
                   @Override
-                  protected Void doInBackground(Void... params) {
+                  public Void doInBackground(Void... params) {
                       StringBuffer xmlData = new StringBuffer();
 
 
-                      xmlData.append("<DATA>");
+                      xmlData.append("<data>");
 
                       xmlData.append("<type>");
                       xmlData.append("50");
@@ -88,9 +81,9 @@ public class form extends AppCompatActivity {
                       xmlData.append("");
                       xmlData.append("</token>");
 
-                      xmlData.append("<comand>");
+                      xmlData.append("<command>");
                       xmlData.append("REGISTER");
-                      xmlData.append("</comand>");
+                      xmlData.append("</command>");
 
                       xmlData.append("<arguments>");
 
@@ -144,12 +137,12 @@ public class form extends AppCompatActivity {
 
                       xmlData.append("</arguments>");
 
-                      xmlData.append("</DATA>");
+                      xmlData.append("</data>");
                       try {
-                          URL url = new URL("https://www.icuadre.com/UAPI/set_api.ashx"); //Enter URL here
+                          URL url = new URL("https://www.icuadre.com/UAPI/set_apimov.ashx"); //API de Juan
                           HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
                           httpURLConnection.setDoOutput(true);
-                          httpURLConnection.setRequestMethod("POST"); // here you are telling that it is a POST request, which can be changed into "PUT", "GET", "DELETE" etc.
+                          httpURLConnection.setRequestMethod("POST"); //  "POST", "PUT", "GET", "DELETE" etc.
                           httpURLConnection.setRequestProperty("Content-Type", "application/xml"); // here you are setting the `Content-Type` for the data you are sending which is `application/json`
                           httpURLConnection.connect();
 
@@ -176,8 +169,12 @@ public class form extends AppCompatActivity {
                           }
                           inputStream.close();
 
-                          String respuesta = response.toString();
-                          Log.d(String.valueOf(wr), respuesta);
+                            String respuestaAPI = response.toString();
+                          Log.d(String.valueOf(wr), respuestaAPI);
+
+
+
+
                       } catch (MalformedURLException e) {
                           e.printStackTrace();
                       } catch (IOException e) {
@@ -188,28 +185,10 @@ public class form extends AppCompatActivity {
                       return null;
                   }
 
-
               }
 
               AsyncT asyncT = new AsyncT();
               asyncT.execute();
-
-              //crearXML xml = new crearXML(nombre,licencia,deviceID,code,telefono);
-
-              //xml.getXML();
-
-              //try {
-              //  xml.httpsRequest("https://www.icuadre.com/UAPI/set_api.ashx", xml.getXML().toString());
-              //  Toast toast = Toast.makeText(getApplicationContext(),"res",Toast.LENGTH_LONG);
-              //  toast.show();
-              //} catch (IOException e) {
-              //  e.printStackTrace();
-              //}
-
-
-
-
-
 
           }});
 

@@ -81,20 +81,19 @@
 
             <Button
                 android:id="@+id/enviar"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
+                android:layout_width="179dp"
+                android:layout_height="67dp"
                 android:layout_gravity="center"
-                android:padding="30dp"
-                app:icon="@android:drawable/ic_menu_send" />
+                android:text="Enviar" />
 
 
             <Button
                 android:id="@+id/volver"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
+                android:layout_width="179dp"
+                android:layout_height="67dp"
                 android:layout_gravity="center"
-                android:padding="30dp"
-                app:icon="@drawable/abc_vector_test" />
+                android:text="Volver" />
+
 
 
             <TextView

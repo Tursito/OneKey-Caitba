@@ -6,11 +6,13 @@ package com.example.caitbaqr;
 import static java.security.AccessController.getContext;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.Menu;
@@ -79,9 +81,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent myIntent1 = new Intent(getApplicationContext(), activity_location.class);
                 startActivityForResult(myIntent1, 0);
 
-
-
-
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -93,11 +92,12 @@ public class MainActivity extends AppCompatActivity {
     //La imagen QR también se actualiza
     public void doWork() {
         runOnUiThread(new Runnable() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             public void run() {
                 try{
                     //Fecha y hora
 
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_hhmmss"), Locale,getDefault;
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddhhmmss"), Locale,getDefault;
                     Date date = new Date();
                     String fecha = dateFormat.format(date);
 
@@ -105,9 +105,21 @@ public class MainActivity extends AppCompatActivity {
                     //QR
                     ImageView imgQr = findViewById(R.id.qrCode);
                     BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
-                    Bitmap bitmap = barcodeEncoder.encodeBitmap(deviceID.toString()+fecha.toString(), BarcodeFormat.QR_CODE, 500, 500);
+
+                    String trama =deviceID.toString()+fecha.toString();//String a encriptar
+
+                    String tramaEncriptada = Utils.AES256.encrypt(trama);// Encriptado
+
+                    String qrDesencriptado = Utils.AES256.decrypt(tramaEncriptada);//Desencriptado
+                    Bitmap bitmap = barcodeEncoder.encodeBitmap(tramaEncriptada, BarcodeFormat.QR_CODE, 500, 500);// mapa QR
                     imgQr.setImageBitmap(bitmap);//Creamos el QR
 
+                    TextView normal = findViewById(R.id.normal);
+                   normal.setText(trama);
+                    TextView encriptado = findViewById(R.id.encriptado);
+                        encriptado.setText(tramaEncriptada);
+                     TextView desencriptado = findViewById(R.id.desencriptado);
+                     desencriptado.setText(qrDesencriptado);
                 }catch (Exception e) {}
             }
         });

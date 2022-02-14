@@ -34,6 +34,30 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/normal"
+                android:gravity="center"
+            />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/encriptado"
+                android:gravity="center"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/desencriptado"
+                android:gravity="center"
+                />
+
+
+
+
+
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
