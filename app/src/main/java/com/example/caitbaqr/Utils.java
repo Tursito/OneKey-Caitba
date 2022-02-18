@@ -37,6 +37,7 @@ public class Utils {
             SALT = new byte[16];
             random.nextBytes(SALT);
 
+
             byte[] bytesIV = new byte[16];
             random.nextBytes(bytesIV);
             ivspec = new IvParameterSpec(bytesIV);

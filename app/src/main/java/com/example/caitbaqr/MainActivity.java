@@ -1,36 +1,26 @@
 package com.example.caitbaqr;
 
 
-
-
-import static java.security.AccessController.getContext;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Base64;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.zxing.BarcodeFormat;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
-
-import java.security.AccessController;
 import java.text.SimpleDateFormat;
+
 import java.util.Date;
 
 
@@ -92,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
     //La imagen QR también se actualiza
     public void doWork() {
         runOnUiThread(new Runnable() {
+
             @RequiresApi(api = Build.VERSION_CODES.O)
             public void run() {
                 try{
@@ -107,19 +98,20 @@ public class MainActivity extends AppCompatActivity {
                     BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
 
                     String trama =deviceID.toString()+fecha.toString();//String a encriptar
-
                     String tramaEncriptada = Utils.AES256.encrypt(trama);// Encriptado
+
 
                     String qrDesencriptado = Utils.AES256.decrypt(tramaEncriptada);//Desencriptado
                     Bitmap bitmap = barcodeEncoder.encodeBitmap(tramaEncriptada, BarcodeFormat.QR_CODE, 500, 500);// mapa QR
                     imgQr.setImageBitmap(bitmap);//Creamos el QR
 
                     TextView normal = findViewById(R.id.normal);
-                   normal.setText(trama);
+                    normal.setText(trama);
                     TextView encriptado = findViewById(R.id.encriptado);
-                        encriptado.setText(tramaEncriptada);
-                     TextView desencriptado = findViewById(R.id.desencriptado);
-                     desencriptado.setText(qrDesencriptado);
+                    encriptado.setText(tramaEncriptada);
+                    TextView desencriptado = findViewById(R.id.desencriptado);
+                    desencriptado.setText(qrDesencriptado);
+
                 }catch (Exception e) {}
             }
         });

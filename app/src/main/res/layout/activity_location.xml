@@ -34,15 +34,25 @@
                 android:text="Ubicaciones" />
 
             <TextView
+                android:id="@+id/respuesta"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="CAITBA:"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="ACCESO ALMACEN" />
+                android:padding="10dp" />
+
+            <Button
+                android:id="@+id/enviar"
+                android:layout_width="179dp"
+                android:layout_height="67dp"
+                android:layout_gravity="center"
+                android:text="Enviar" />
+
+
+            <Button
+                android:id="@+id/volver"
+                android:layout_width="179dp"
+                android:layout_height="67dp"
+                android:layout_gravity="center"
+                android:text="Volver" />
 
         </LinearLayout>
     </ScrollView>

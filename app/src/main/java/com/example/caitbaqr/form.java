@@ -10,20 +10,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import android.provider.Settings;
-import android.util.Log;
+import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
+import android.widget.TextView;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 
 public class form extends AppCompatActivity {
@@ -40,6 +34,7 @@ public class form extends AppCompatActivity {
         layout = findViewById(R.id.form_main);
 
 
+
         //Enviar información
         Button enviar = findViewById(R.id.enviar);
         enviar.setOnClickListener(new View.OnClickListener() {
@@ -50,140 +45,46 @@ public class form extends AppCompatActivity {
                   String nombre = nombreForm.getText().toString();
                   EditText telefonoForm = findViewById(R.id.telefono);
               String tel = telefonoForm.getText().toString();
-                  EditText codeForm = findViewById(R.id.licencia);
-              String code = codeForm.getText().toString();
+                  EditText codeForm = findViewById(R.id.code);
+                  //Cogemos code con un String y lo parseamos a un Int
+              String codeString= codeForm.getText().toString();
+              int code=Integer.parseInt(codeString);
+
                   String licencia = "F672D1E5-52CD-470A-BC10-B8609D7E509D";
 
 
+              crearXML xml1 = new crearXML(nombre,licencia,deviceID,code,tel);
 //Clase asíncrona para la conexión con la API
               class AsyncT extends AsyncTask<Void,Void,Void>{
 
                   @Override
                   public Void doInBackground(Void... params) {
-                      StringBuffer xmlData = new StringBuffer();
 
 
-                      xmlData.append("<data>");
-
-                      xmlData.append("<type>");
-                      xmlData.append("50");
-                      xmlData.append("</type>");
-
-                      xmlData.append("<product>");
-                      xmlData.append("CLOUDCAITBA");
-                      xmlData.append("</product>");
-
-                      xmlData.append("<licence>");
-                      xmlData.append(licencia);
-                      xmlData.append("</licence>");
-
-                      xmlData.append("<token>");
-                      xmlData.append("");
-                      xmlData.append("</token>");
-
-                      xmlData.append("<command>");
-                      xmlData.append("REGISTER");
-                      xmlData.append("</command>");
-
-                      xmlData.append("<arguments>");
-
-                      xmlData.append("<argument>");
-                      xmlData.append("<name>");
-                      xmlData.append("Nombre");
-                      xmlData.append("</name>");
-                      xmlData.append("<value>");
-                      xmlData.append("<![CDATA["+nombre+"]]>");
-                      xmlData.append("</value>");
-                      xmlData.append("<type>");
-                      xmlData.append("String");
-                      xmlData.append("</type>");
-                      xmlData.append("</argument>");
-
-                      xmlData.append("<argument>");
-                      xmlData.append("<name>");
-                      xmlData.append("Telefono");
-                      xmlData.append("</name>");
-                      xmlData.append("<value>");
-                      xmlData.append(tel);
-                      xmlData.append("</value>");
-                      xmlData.append("<type>");
-                      xmlData.append("Integer");
-                      xmlData.append("</type>");
-                      xmlData.append("</argument>");
-
-                      xmlData.append("<argument>");
-                      xmlData.append("<name>");
-                      xmlData.append("device-id");
-                      xmlData.append("</name>");
-                      xmlData.append("<value>");
-                      xmlData.append("<![CDATA["+code+"]]>");
-                      xmlData.append("</value>");
-                      xmlData.append("<type>");
-                      xmlData.append("String");
-                      xmlData.append("</type>");
-                      xmlData.append("</argument>");
-
-                      xmlData.append("<argument>");
-                      xmlData.append("<name>");
-                      xmlData.append("device-id");
-                      xmlData.append("</name>");
-                      xmlData.append("<value>");
-                      xmlData.append("<![CDATA["+deviceID+"]]>");
-                      xmlData.append("</value>");
-                      xmlData.append("<type>");
-                      xmlData.append("String");
-                      xmlData.append("</type>");
-                      xmlData.append("</argument>");
-
-                      xmlData.append("</arguments>");
-
-                      xmlData.append("</data>");
+                    xml1.getXMLRegister();
                       try {
-                          URL url = new URL("https://www.icuadre.com/UAPI/set_apimov.ashx"); //API de Juan
-                          HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
-                          httpURLConnection.setDoOutput(true);
-                          httpURLConnection.setRequestMethod("POST"); //  "POST", "PUT", "GET", "DELETE" etc.
-                          httpURLConnection.setRequestProperty("Content-Type", "application/xml"); // here you are setting the `Content-Type` for the data you are sending which is `application/json`
-                          httpURLConnection.connect();
+                          xml1.httpsRequest(xml1.getXMLRegister().toString());
+                          //Alterar la vista en una asyncTask
+                          runOnUiThread(new Runnable() {
+                              @Override
+                              public void run() {
 
+                                  // Stuff that updates the UI
+                                  String respuestaAPI = xml1.getRespuesta();
+                                  TextView respuesta = findViewById(R.id.respuesta);
+                                  respuesta.setText(respuestaAPI);
+                              }
+                          });
 
-                            String datos = xmlData.toString();
-                          DataOutputStream wr = new DataOutputStream(httpURLConnection.getOutputStream());
-
-                          // Write XML
-                          OutputStream outputStream = httpURLConnection.getOutputStream();
-                          byte[] b = datos.toString().getBytes("UTF-8");
-                          outputStream.write(b);
-                          outputStream.flush();
-                          outputStream.close();
-                          String pregunta = xmlData.toString();
-                          Log.d(String.valueOf(wr), pregunta);
-
-                          // Read XML
-                          InputStream inputStream = httpURLConnection.getInputStream();
-                          byte[] res = new byte[4096];
-                          int i = 0;
-                          StringBuilder response = new StringBuilder();
-                          while ((i = inputStream.read(res)) != -1) {
-                              response.append(new String(res, 0, i));
-                          }
-                          inputStream.close();
-
-                            String respuestaAPI = response.toString();
-                          Log.d(String.valueOf(wr), respuestaAPI);
-
-
-
-
-                      } catch (MalformedURLException e) {
-                          e.printStackTrace();
                       } catch (IOException e) {
                           e.printStackTrace();
-
                       }
+
 
                       return null;
                   }
+
+
 
               }
 
@@ -191,7 +92,6 @@ public class form extends AppCompatActivity {
               asyncT.execute();
 
           }});
-
 
 
 
@@ -204,6 +104,7 @@ public class form extends AppCompatActivity {
                 startActivityForResult(intent, 0);
             }
         });
+
 
 
 
