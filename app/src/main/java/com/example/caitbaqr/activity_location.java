@@ -22,17 +22,6 @@ public class activity_location extends AppCompatActivity {
 
         String deviceID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
 
-
-
-
-        //Enviar información
-        Button enviar = findViewById(R.id.enviar);
-        enviar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-
                 //Clase asíncrona para la conexión con la API
                 class AsyncT extends AsyncTask<Void,Void,Void> {
 
@@ -49,10 +38,15 @@ public class activity_location extends AppCompatActivity {
                                 @Override
                                 public void run() {
 
-                                    // Stuff that updates the UI
+                                    // Alteramos la vista (UI)
                                     String respuestaAPI = xml1.getRespuesta();
+                                    xml1.ubicaciones(respuestaAPI);
+                                    String respuestaParseada = xml1.getRespuestaParseada();
+
+
+
                                     TextView respuesta = findViewById(R.id.respuesta);
-                                    respuesta.setText(respuestaAPI);
+                                    respuesta.setText(respuestaParseada);
                                 }
                             });
 
@@ -70,10 +64,6 @@ public class activity_location extends AppCompatActivity {
 
                 AsyncT asyncT = new AsyncT();
                 asyncT.execute();
-
-            }});
-
-
 
         //Volver al main_activity
         Button volver = findViewById(R.id.volver);

@@ -2,13 +2,26 @@ package com.example.caitbaqr;
 
 import android.util.Log;
 
+import org.w3c.dom.CharacterData;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 public class crearXML {
     private String nombre;
@@ -17,6 +30,8 @@ public class crearXML {
     private int code;
     private String telefono;
     private String respuesta;
+
+    private String RespuestaParseada;
 
     public crearXML(String nombre, String licencia, String device_ID, int code, String telefono) {
         super();
@@ -70,6 +85,8 @@ public class crearXML {
     public String getRespuesta() {
         return respuesta;
     }
+
+public String getRespuestaParseada(){return RespuestaParseada;}
 
     public StringBuffer getXMLRegister () {
 
@@ -254,7 +271,84 @@ public class crearXML {
         return respuesta;
     }
 
-}
+    public String ubicaciones(String respuesta){
+        DocumentBuilder db = null;
+        try {
+            db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        } catch (ParserConfigurationException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        InputSource is = new InputSource();
+        is.setCharacterStream(new StringReader(respuesta));
+
+        Document doc = null;
+        try {
+            doc = db.parse(is);
+        } catch (SAXException | IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        System.out.println("Root element: " + doc.getDocumentElement().getNodeName()); //Mostramos el elemento root.
+        NodeList nodes = doc.getElementsByTagName("install");
+
+        System.out.println(" ");
+        for (int i = 0; i < nodes.getLength(); i++) {
+            Element element = (Element) nodes.item(i);
+
+            NodeList name = element.getElementsByTagName("name");
+            Element line1 = (Element) name.item(0);
+
+            NodeList fecha_desde = element.getElementsByTagName("fecha_desde");
+            Element line = (Element) fecha_desde.item(0);
+
+            NodeList fecha_hasta = element.getElementsByTagName("fecha_hasta");
+            Element line2 = (Element) fecha_hasta.item(0);
+
+            NodeList perfil = element.getElementsByTagName("perfil_accesos");
+            Element line3 = (Element) perfil.item(0);
+            NodeList estado = element.getElementsByTagName("estado");
+            Element line4 = (Element) estado.item(0);
+
+
+            System.out.println("Nombre: " + getCharacterDataFromElement(line1));
+            System.out.println("Fecha desde: " + getCharacterDataFromElement(line));
+            System.out.println("Fecha hasta: " + getCharacterDataFromElement(line2));
+            System.out.println("Perfil de accceso: " + getCharacterDataFromElement(line3));
+            System.out.println("Estado : " + getCharacterDataFromElement(line4));
+
+
+             RespuestaParseada =
+                    "Nombre: " + getCharacterDataFromElement(line1)+"\n"+
+                            "Fecha desde: " + getCharacterDataFromElement(line)+"\n"+
+                            "Fecha hasta: " +getCharacterDataFromElement(line2)+"\n"+
+                            "Perfil de accceso: " + getCharacterDataFromElement(line3)+"\n"+
+                            "Estado : " + getCharacterDataFromElement(line4)
+                    ;
+
+
+
+        }
+
+        return RespuestaParseada;
+
+    }
+
+
+
+    public static String getCharacterDataFromElement(Element e) {
+        Node child = e.getFirstChild();
+        if (child instanceof CharacterData) {
+            CharacterData cd = (CharacterData) child;
+            return cd.getData();
+        }
+        return "";
+    }
+
+    }
+
+
 
 
 

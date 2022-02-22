@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -54,6 +55,13 @@ public class form extends AppCompatActivity {
 
 
               crearXML xml1 = new crearXML(nombre,licencia,deviceID,code,tel);
+
+              if (tel == null){
+
+              }
+                  else{
+
+              }
 //Clase asíncrona para la conexión con la API
               class AsyncT extends AsyncTask<Void,Void,Void>{
 
@@ -70,9 +78,10 @@ public class form extends AppCompatActivity {
                               public void run() {
 
                                   // Stuff that updates the UI
-                                  String respuestaAPI = xml1.getRespuesta();
-                                  TextView respuesta = findViewById(R.id.respuesta);
-                                  respuesta.setText(respuestaAPI);
+                                  //String respuestaAPI = xml1.getRespuesta();
+
+                                 // TextView respuesta = findViewById(R.id.respuesta);
+                                  //respuesta.setText(respuestaAPI);
                               }
                           });
 

@@ -27,7 +27,7 @@ public class Utils {
         private AES256(){
         }
 
-        private static final String SECRET_KEY = "NJ3rjs8nfJD67nmcJdNS78d9";// Clave privada. 24-22
+        private static final String SECRET_KEY = "NJ3rjs8nfJD67nmcJdNS78d9";// Clave privada. 24.
         private static final byte[] SALT;
         private static final SecureRandom random;
         private static final IvParameterSpec ivspec;

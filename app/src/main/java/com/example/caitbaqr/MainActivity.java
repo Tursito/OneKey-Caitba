@@ -87,8 +87,8 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 try{
                     //Fecha y hora
-
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddhhmmss"), Locale,getDefault;
+                    
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_hhmmss"), Locale,getDefault;
                     Date date = new Date();
                     String fecha = dateFormat.format(date);
 
@@ -105,12 +105,7 @@ public class MainActivity extends AppCompatActivity {
                     Bitmap bitmap = barcodeEncoder.encodeBitmap(tramaEncriptada, BarcodeFormat.QR_CODE, 500, 500);// mapa QR
                     imgQr.setImageBitmap(bitmap);//Creamos el QR
 
-                    TextView normal = findViewById(R.id.normal);
-                    normal.setText(trama);
-                    TextView encriptado = findViewById(R.id.encriptado);
-                    encriptado.setText(tramaEncriptada);
-                    TextView desencriptado = findViewById(R.id.desencriptado);
-                    desencriptado.setText(qrDesencriptado);
+
 
                 }catch (Exception e) {}
             }
