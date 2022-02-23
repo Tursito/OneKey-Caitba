@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
                     String trama =deviceID.toString()+fecha.toString();//String a encriptar
                     String tramaEncriptada = utils.getAES(trama);// Encriptado
-                    System.out.println(tramaEncriptada);
+
 
                     String qrDesencriptado = utils.getAESDecrypt(tramaEncriptada);//Desencriptado
                     Bitmap bitmap = barcodeEncoder.encodeBitmap(tramaEncriptada, BarcodeFormat.QR_CODE, 500, 500);// mapa QR

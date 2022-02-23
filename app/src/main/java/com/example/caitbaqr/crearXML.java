@@ -27,13 +27,13 @@ public class crearXML {
     private String nombre;
     private String licencia;
     private String Device_ID;
-    private int code;
+    private String code;
     private String telefono;
     private String respuesta;
 
     private String RespuestaParseada;
 
-    public crearXML(String nombre, String licencia, String device_ID, int code, String telefono) {
+    public crearXML(String nombre, String licencia, String device_ID, String code, String telefono) {
         super();
         this.nombre = nombre;
         this.licencia = licencia;

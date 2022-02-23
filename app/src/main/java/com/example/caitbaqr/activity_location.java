@@ -75,11 +75,7 @@ public class activity_location extends AppCompatActivity {
             }
         });
 
-
-
-
     }
-
 
 }
 
