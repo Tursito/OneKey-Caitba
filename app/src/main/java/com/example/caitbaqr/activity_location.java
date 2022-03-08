@@ -33,6 +33,7 @@ public class activity_location extends AppCompatActivity {
                         xml1.getXMLLoad();
                         try {
                             xml1.httpsRequest(xml1.getXMLLoad().toString());
+
                             //Alterar la vista en una asyncTask
                             runOnUiThread(new Runnable() {
                                 @Override

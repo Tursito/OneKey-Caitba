@@ -1,6 +1,8 @@
 package com.example.caitbaqr;
 
 
+import static javax.crypto.Cipher.SECRET_KEY;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
@@ -28,7 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     String deviceID;
-
+    String fSalt = "kdsjh/8sdjhsdjhsd";
+    private static final String SECRET_KEY = "NJ3rjs8nfJD67nmcJdNS78d9";
 
 
     @Override
@@ -99,12 +102,18 @@ public class MainActivity extends AppCompatActivity {
                     BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
 
                     String trama =deviceID.toString()+fecha.toString();//String a encriptar
-                    String tramaEncriptada = utils.getAES(trama);// Encriptado
+
+                    String tramaEncriptada = utils.encrypt(SECRET_KEY, fSalt, trama);
+
+                    String qrDesencriptado = utils.decrypt(SECRET_KEY, fSalt, tramaEncriptada);
 
 
-                    String qrDesencriptado = utils.getAESDecrypt(tramaEncriptada);//Desencriptado
+
+                   // String qrDesencriptado = utils.getAESDecrypt(tramaEncriptada);//Desencriptado
                     Bitmap bitmap = barcodeEncoder.encodeBitmap(tramaEncriptada, BarcodeFormat.QR_CODE, 500, 500);// mapa QR
                     imgQr.setImageBitmap(bitmap);//Creamos el QR
+
+                    System.out.println(tramaEncriptada);
 
 
 
