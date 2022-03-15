@@ -34,7 +34,6 @@ public class Utils {
     private static final String ALGORITHM = "AES/CBC/PKCS5PADDING";
     private static final String ENCRYPTION_TYPE = "AES";
     private static final int IV_LENGTH = 16;
-    private static final String SECRET_KEY = "NJ3rjs8nfJD67nmcJdNS78d9";
     private static final int ITERATION_COUNT = 65536;
     private static final int KEY_LENGTH = 256;
 
