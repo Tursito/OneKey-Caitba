@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import java.io.IOException;
@@ -89,8 +90,13 @@ public class form extends AppCompatActivity {
                                       // Stuff that updates the UI
                                       String respuestaAPI = xml1.getRespuesta();
 
-                                      TextView respuesta = findViewById(R.id.respuesta);
-                                      respuesta.setText(respuestaAPI);
+                                      xml1.registro(respuestaAPI);
+                                      String respuestaParseada = xml1.getRespuestaParseada();
+
+
+
+                                      Toast toast = Toast.makeText(getApplicationContext(), respuestaParseada, Toast.LENGTH_LONG);
+                                      toast.show();
                                   }
                               });
 

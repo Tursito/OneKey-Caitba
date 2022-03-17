@@ -313,19 +313,72 @@ public String getRespuestaParseada(){return RespuestaParseada;}
 
 
             System.out.println("Nombre: " + getCharacterDataFromElement(line1));
-            System.out.println("Fecha desde: " + getCharacterDataFromElement(line));
-            System.out.println("Fecha hasta: " + getCharacterDataFromElement(line2));
-            System.out.println("Perfil de accceso: " + getCharacterDataFromElement(line3));
-            System.out.println("Estado : " + getCharacterDataFromElement(line4));
+            System.out.println("  Fecha desde: " + getCharacterDataFromElement(line));
+            System.out.println("  Fecha hasta: " + getCharacterDataFromElement(line2));
+            System.out.println("  Perfil de accceso: " + getCharacterDataFromElement(line3));
+            System.out.println("  Estado : " + getCharacterDataFromElement(line4));
 
 
              RespuestaParseada =
                     "Nombre: " + getCharacterDataFromElement(line1)+"\n"+
+                            " "+
                             "Fecha desde: " + getCharacterDataFromElement(line)+"\n"+
+                            " "+
                             "Fecha hasta: " +getCharacterDataFromElement(line2)+"\n"+
+                            " "+
                             "Perfil de accceso: " + getCharacterDataFromElement(line3)+"\n"+
+                            " "+
                             "Estado : " + getCharacterDataFromElement(line4)
                     ;
+
+
+
+        }
+
+        return RespuestaParseada;
+
+    }
+
+    public String registro(String respuesta){
+        DocumentBuilder db = null;
+        try {
+            db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        } catch (ParserConfigurationException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        InputSource is = new InputSource();
+        is.setCharacterStream(new StringReader(respuesta));
+
+        Document doc = null;
+        try {
+            doc = db.parse(is);
+        } catch (SAXException | IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        System.out.println("Root element: " + doc.getDocumentElement().getNodeName()); //Mostramos el elemento root.
+        NodeList nodes = doc.getElementsByTagName("Error");
+
+        System.out.println(" ");
+        for (int i = 0; i < nodes.getLength(); i++) {
+            Element element = (Element) nodes.item(i);
+
+            NodeList name = element.getElementsByTagName("msg");
+            Element line1 = (Element) name.item(0);
+
+
+
+
+
+            System.out.println("Mensaje: " + getCharacterDataFromElement(line1));
+
+
+
+            RespuestaParseada =
+                    getCharacterDataFromElement(line1)+"\n"
+            ;
 
 
 

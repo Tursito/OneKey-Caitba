@@ -30,14 +30,20 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="Ubicaciones" />
+                android:text="Ubicaciones"
+                android:padding="15dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="40sp"
+                />
 
             <TextView
                 android:id="@+id/respuesta"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp" />
+                android:fontFamily="@fonts/roboto_regular"
+                android:padding="15dp"
+                android:textSize="9pt"
+                 />
 
 
             <Button

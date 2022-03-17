@@ -1,8 +1,10 @@
 package com.example.caitbaqr;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -40,6 +42,7 @@ public class activity_location extends AppCompatActivity {
                                 public void run() {
 
                                     // Alteramos la vista (UI)
+
                                     String respuestaAPI = xml1.getRespuesta();
                                     xml1.ubicaciones(respuestaAPI);
                                     String respuestaParseada = xml1.getRespuestaParseada();
@@ -47,7 +50,12 @@ public class activity_location extends AppCompatActivity {
 
 
                                     TextView respuesta = findViewById(R.id.respuesta);
+
+
+
+
                                     respuesta.setText(respuestaParseada);
+                              ;
                                 }
                             });
 

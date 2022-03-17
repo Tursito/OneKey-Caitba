@@ -16,70 +16,80 @@
         android:gravity="center"
         android:layout_gravity="center">
     </RelativeLayout>
+
     <ScrollView
         android:id="@+id/scroll_view"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_above="@+id/footer"
         android:fillViewport="true">
+
         <LinearLayout
             android:id="@+id/myLayout"
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#FFFFFF"
-            android:fillViewport="true">
+            android:fillViewport="true"
+            android:orientation="vertical">
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/tv_logo"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="30dp"
+                android:fontFamily="@fonts/indigo_daisy"
                 android:text="Registro"
-                android:padding="10dp"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Nombre:"
-                android:padding="10dp"
-                />
+                android:textAlignment="center"
+
+                android:textSize="30sp" />
+
 
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/nombre"
-                android:padding="10dp"
-                />
-            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Teléfono:"
-                android:padding="10dp"
-                />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/telefono"
-                android:padding="10dp"
-                android:inputType="number"
-                />
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Código de seguridad:"
-                android:padding="10dp"
-                />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/code"
-                android:padding="10dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_marginBottom="20dp"
-                android:inputType="number"
-                />
+                android:background="@drawable/et_custom"
+                android:fontFamily="@font/roboto_regular"
+                android:hint="Nombre"
+                android:inputType="textPersonName"
+                android:padding="15dp"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/telefono"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/et_custom"
+                android:fontFamily="@font/roboto_regular"
+                android:hint="Teléfono"
+                android:inputType="textEmailAddress"
+                android:padding="15dp"
+                android:textSize="15sp" />
+
+
+            <EditText
+                android:id="@+id/code"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/et_custom"
+                android:fontFamily="@font/roboto_regular"
+                android:hint="Código de seguridad:"
+                android:inputType="textEmailAddress"
+                android:padding="15dp"
+                android:textSize="15sp" />
+
+
 
             <Button
                 android:id="@+id/enviar"
@@ -97,13 +107,11 @@
                 android:text="Volver" />
 
 
-
             <TextView
+                android:id="@+id/respuesta"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/respuesta"
-                android:padding="10dp"
-                />
+                android:padding="10dp" />
 
 
         </LinearLayout>
