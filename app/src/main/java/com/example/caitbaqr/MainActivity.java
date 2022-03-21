@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                     Utils utils = new Utils();
                     //Fecha y hora
                     
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_hhmmss"), Locale,getDefault;
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd hhmmss"), Locale,getDefault;
                     Date date = new Date();
                     String fecha = dateFormat.format(date);
 
@@ -101,7 +101,9 @@ public class MainActivity extends AppCompatActivity {
                     ImageView imgQr = findViewById(R.id.qrCode);
                     BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
 
-                    String trama =deviceID.toString()+"_"+fecha.toString();//String a encriptar
+                    String trama =deviceID.toString()+" "+fecha.toString();//String a encriptar
+
+
                     System.out.println(trama);
                     String tramaEncriptada = utils.encrypt(SECRET_KEY, fSalt, trama);
 
@@ -110,11 +112,10 @@ public class MainActivity extends AppCompatActivity {
 
 
                    // String qrDesencriptado = utils.getAESDecrypt(tramaEncriptada);//Desencriptado
-                    Bitmap bitmap = barcodeEncoder.encodeBitmap(tramaEncriptada, BarcodeFormat.QR_CODE, 500, 500);// mapa QR
+                    Bitmap bitmap = barcodeEncoder.encodeBitmap(tramaEncriptada, BarcodeFormat.QR_CODE, 600, 600);// mapa QR
                     imgQr.setImageBitmap(bitmap);//Creamos el QR
 
                     System.out.println(tramaEncriptada);
-
 
 
                 }catch (Exception e) {}

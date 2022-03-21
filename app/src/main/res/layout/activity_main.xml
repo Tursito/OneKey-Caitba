@@ -32,9 +32,12 @@
                 android:id="@+id/qrCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
                 android:layout_centerHorizontal="true"
                 android:gravity="center"/>
+
+              <!--android:adjustViewBounds="true"
+               Para hacer el QR más grande-->
+
 
 
 
