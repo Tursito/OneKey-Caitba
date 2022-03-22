@@ -1,4 +1,4 @@
-package com.example.caitbaqr;
+package com.caitba.caitbaqr;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+
 
 import java.io.IOException;
 

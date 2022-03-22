@@ -1,4 +1,4 @@
-package com.example.caitbaqr;
+package com.caitba.caitbaqr;
 
 
 
@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
 
 import com.google.zxing.BarcodeFormat;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
@@ -73,6 +74,13 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent myIntent1 = new Intent(getApplicationContext(), activity_location.class);
                 startActivityForResult(myIntent1, 0);
+
+                return true;
+            case R.id.acercaDe:
+                //Ir a activity_location.class
+
+                Intent myIntent2 = new Intent(getApplicationContext(), acercaDe.class);
+                startActivityForResult(myIntent2, 0);
 
                 return true;
             default:

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".acercaDe">
+xmlns:ads="http://schemas.android.com/apk/res-auto">
+
+<RelativeLayout
+    android:id="@+id/footer"
+    android:layout_width="match_parent"
+    android:layout_height="57dp"
+    android:layout_alignParentBottom="true"
+    android:background="@drawable/prueba1"
+    android:gravity="center"
+    android:layout_gravity="center">
+</RelativeLayout>
+<ScrollView
+    android:id="@+id/scroll_view"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_above="@+id/footer"
+    android:fillViewport="true">
+    <LinearLayout
+        android:id="@+id/myLayout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:fillViewport="true">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Acerca de"
+            android:padding="15dp"
+            android:fontFamily="@font/roboto_regular"
+            android:textSize="40sp"
+            />
+
+        <TextView
+            android:id="@+id/nombreEmpresa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@fonts/roboto_regular"
+            android:padding="15dp"
+            android:textSize="9pt"
+            />
+        <TextView
+            android:id="@+id/mailEmpresa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@fonts/roboto_regular"
+            android:padding="15dp"
+            android:textSize="9pt"
+            />
+
+        <TextView
+            android:id="@+id/version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@fonts/roboto_regular"
+            android:padding="15dp"
+            android:textSize="9pt"
+            />
+
+
+
+
+        <Button
+            android:id="@+id/volver"
+            android:layout_width="179dp"
+            android:layout_height="67dp"
+            android:layout_gravity="center"
+            android:text="Volver" />
+
+    </LinearLayout>
+</ScrollView>
+</RelativeLayout>

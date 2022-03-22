@@ -1,4 +1,4 @@
-package com.example.caitbaqr;
+package com.caitba.caitbaqr;
 
 import android.util.Log;
 
