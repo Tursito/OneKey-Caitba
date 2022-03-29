@@ -23,6 +23,8 @@ import android.widget.Toast;
 
 
 import java.io.IOException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
 
 
 public class form extends AppCompatActivity {
@@ -36,6 +38,12 @@ public class form extends AppCompatActivity {
 
 
         String deviceID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+
+
+
+
+        String sha256 = getSHA256(deviceID);
+        System.out.println("Device_ID: "+sha256);
         layout = findViewById(R.id.form_main);
 
 
@@ -51,7 +59,9 @@ public class form extends AppCompatActivity {
                   EditText telefonoForm = findViewById(R.id.telefono);
                     String tel = telefonoForm.getText().toString();
                   EditText codeForm = findViewById(R.id.code);
-                    String  code = codeForm.getText().toString();
+                    String  code = codeForm.getText().toString().toUpperCase();
+
+
 
                   String licencia = "F672D1E5-52CD-470A-BC10-B8609D7E509D";
               if(TextUtils.isEmpty(nombre)) {
@@ -73,7 +83,7 @@ public class form extends AppCompatActivity {
 
 
                   crearXML xml1 = new crearXML(nombre,licencia,deviceID,code,tel);
-
+              
 //Clase asíncrona para la conexión con la API
                   class AsyncT extends AsyncTask<Void,Void,Void>{
 
@@ -97,8 +107,8 @@ public class form extends AppCompatActivity {
 
 
 
-                                      Toast toast = Toast.makeText(getApplicationContext(), respuestaParseada, Toast.LENGTH_LONG);
-                                      toast.show();
+                                     Toast toast = Toast.makeText(getApplicationContext(), respuestaParseada, Toast.LENGTH_LONG);
+                                     toast.show();
                                   }
                               });
 
@@ -138,7 +148,20 @@ public class form extends AppCompatActivity {
 
 
     }
+    public static String getSHA256(String input){
 
+        String toReturn = null;
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            digest.reset();
+            digest.update(input.getBytes("utf8"));
+            toReturn = String.format("%064x", new BigInteger(1, digest.digest()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return toReturn;
+    }
 
 }
 

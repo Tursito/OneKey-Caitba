@@ -359,7 +359,7 @@ public String getRespuestaParseada(){return RespuestaParseada;}
         }
 
         System.out.println("Root element: " + doc.getDocumentElement().getNodeName()); //Mostramos el elemento root.
-        NodeList nodes = doc.getElementsByTagName("Error");
+        NodeList nodes = doc.getElementsByTagName("error");
 
         System.out.println(" ");
         for (int i = 0; i < nodes.getLength(); i++) {

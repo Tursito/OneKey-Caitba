@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                     String trama =deviceID.toString()+" "+fecha.toString();//String a encriptar
 
 
-                    System.out.println(trama);
+                    System.out.println("Trama original: "+trama);
                     String tramaEncriptada = utils.encrypt(SECRET_KEY, fSalt, trama);
 
                     String qrDesencriptado = utils.decrypt(SECRET_KEY, fSalt, tramaEncriptada);
@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
                     Bitmap bitmap = barcodeEncoder.encodeBitmap(tramaEncriptada, BarcodeFormat.QR_CODE, 600, 600);// mapa QR
                     imgQr.setImageBitmap(bitmap);//Creamos el QR
 
-                    System.out.println(tramaEncriptada);
+                    System.out.println("Trama encriptada: "+tramaEncriptada);
 
 
                 }catch (Exception e) {}
