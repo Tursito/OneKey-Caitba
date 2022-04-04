@@ -42,7 +42,7 @@ public class form extends AppCompatActivity {
 
 
 
-        String sha256 = getSHA256(deviceID);
+        String sha256 = getSHA256(deviceID).toUpperCase();
         System.out.println("Device_ID: "+sha256);
         layout = findViewById(R.id.form_main);
 
@@ -50,6 +50,7 @@ public class form extends AppCompatActivity {
 
         //Enviar información
         Button enviar = findViewById(R.id.enviar);
+        String finalSha256 = sha256;
         enviar.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
@@ -82,7 +83,7 @@ public class form extends AppCompatActivity {
 
 
 
-                  crearXML xml1 = new crearXML(nombre,licencia,deviceID,code,tel);
+                  crearXML xml1 = new crearXML(nombre,licencia, finalSha256,code,tel);
               
 //Clase asíncrona para la conexión con la API
                   class AsyncT extends AsyncTask<Void,Void,Void>{
@@ -101,6 +102,7 @@ public class form extends AppCompatActivity {
 
                                       // Stuff that updates the UI
                                       String respuestaAPI = xml1.getRespuesta();
+                                      System.out.println(respuestaAPI);
 
                                       xml1.registro(respuestaAPI);
                                       String respuestaParseada = xml1.getRespuestaParseada();

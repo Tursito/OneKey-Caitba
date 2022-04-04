@@ -32,6 +32,7 @@ public class crearXML {
     private String respuesta;
 
     private String RespuestaParseada;
+    private int ErrorParseado;
 
     public crearXML(String nombre, String licencia, String device_ID, String code, String telefono) {
         super();
@@ -388,6 +389,55 @@ public String getRespuestaParseada(){return RespuestaParseada;}
 
     }
 
+
+    public int CodeRegistro(String respuesta){
+        DocumentBuilder db = null;
+        try {
+            db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        } catch (ParserConfigurationException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        InputSource is = new InputSource();
+        is.setCharacterStream(new StringReader(respuesta));
+
+        Document doc = null;
+        try {
+            doc = db.parse(is);
+        } catch (SAXException | IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        System.out.println("Root element: " + doc.getDocumentElement().getNodeName()); //Mostramos el elemento root.
+        NodeList nodes = doc.getElementsByTagName("error");
+
+        System.out.println(" ");
+        for (int i = 0; i < nodes.getLength(); i++) {
+            Element element = (Element) nodes.item(i);
+
+            NodeList name = element.getElementsByTagName("code");
+            Element line1 = (Element) name.item(0);
+
+
+
+
+
+            System.out.println("Code: " + getCharacterDataFromElement(line1));
+
+
+
+            ErrorParseado =
+                    Integer.parseInt(getCharacterDataFromElement(line1)+"\n")
+            ;
+
+
+
+        }
+
+        return ErrorParseado;
+
+    }
 
 
     public static String getCharacterDataFromElement(Element e) {

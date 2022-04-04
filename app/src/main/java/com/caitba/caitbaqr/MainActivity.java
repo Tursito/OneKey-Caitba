@@ -3,6 +3,8 @@ package com.caitba.caitbaqr;
 
 
 
+import static com.caitba.caitbaqr.form.getSHA256;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
@@ -25,12 +27,14 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 import java.text.SimpleDateFormat;
 
 import java.util.Date;
+import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity {
 
 
     String deviceID;
+
     String fSalt = "kdsjh/8sdjhsdjhsd";
     private static final String SECRET_KEY = "NJ3rjs8nfJD67nmcJdNS78d9";
 
@@ -41,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //Recogemos el AID (solo una vez)
         deviceID = Settings.Secure.getString(this.getContentResolver(),Settings.Secure.ANDROID_ID);
+
+    System.out.println("device"+deviceID);
+
+
 
         //Creamos el hilo y le asignamos una clase.
         //Este hilo se usa para el QR.
@@ -109,10 +117,15 @@ public class MainActivity extends AppCompatActivity {
                     ImageView imgQr = findViewById(R.id.qrCode);
                     BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
 
-                    String trama =deviceID.toString()+" "+fecha.toString();//String a encriptar
+
+                    String deviceIDSHA = getSHA256(deviceID).toUpperCase();
+                    System.out.println("deviceSHA "+deviceIDSHA);
 
 
-                    System.out.println("Trama original: "+trama);
+
+                    String trama =deviceIDSHA.toString()+" "+fecha.toString();//String a encriptar
+
+
                     String tramaEncriptada = utils.encrypt(SECRET_KEY, fSalt, trama);
 
                     String qrDesencriptado = utils.decrypt(SECRET_KEY, fSalt, tramaEncriptada);
@@ -123,7 +136,6 @@ public class MainActivity extends AppCompatActivity {
                     Bitmap bitmap = barcodeEncoder.encodeBitmap(tramaEncriptada, BarcodeFormat.QR_CODE, 600, 600);// mapa QR
                     imgQr.setImageBitmap(bitmap);//Creamos el QR
 
-                    System.out.println("Trama encriptada: "+tramaEncriptada);
 
 
                 }catch (Exception e) {}
