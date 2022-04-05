@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
             while(!Thread.currentThread().isInterrupted()){
                 try {
                     doWork();
-                    Thread.sleep(5000);//Cada 5 segundos recarga el QR.
+                    Thread.sleep(3000);//Cada 5 segundos recarga el QR.
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }catch(Exception e){
