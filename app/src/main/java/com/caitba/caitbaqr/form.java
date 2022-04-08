@@ -2,6 +2,8 @@ package com.caitba.caitbaqr;
 
 
 
+import static android.os.SystemClock.sleep;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -43,7 +45,7 @@ public class form extends AppCompatActivity {
 
 
         String sha256 = getSHA256(deviceID).toUpperCase();
-        System.out.println("Device_ID: "+sha256);
+
         layout = findViewById(R.id.form_main);
 
 
@@ -52,87 +54,103 @@ public class form extends AppCompatActivity {
         Button enviar = findViewById(R.id.enviar);
         String finalSha256 = sha256;
         enviar.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-              //Recogemos la información del formulario
-                  EditText nombreForm = findViewById(R.id.nombre);
-                    String nombre = nombreForm.getText().toString();
-                  EditText telefonoForm = findViewById(R.id.telefono);
-                    String tel = telefonoForm.getText().toString();
-                  EditText codeForm = findViewById(R.id.code);
-                    String  code = codeForm.getText().toString().toUpperCase();
+            @Override
+            public void onClick(View view) {
+                //Recogemos la información del formulario
+                EditText nombreForm = findViewById(R.id.nombre);
+                String nombre = nombreForm.getText().toString();
+                EditText telefonoForm = findViewById(R.id.telefono);
+                String tel = telefonoForm.getText().toString();
+                EditText codeForm = findViewById(R.id.code);
+                String  code = codeForm.getText().toString().toUpperCase();
 
 
 
-                  String licencia = "F672D1E5-52CD-470A-BC10-B8609D7E509D";
-              if(TextUtils.isEmpty(nombre)) {
-                  nombreForm.setError("El campo nombre no puede estar vacio");
-                  return;
-              }
+                String licencia = "F672D1E5-52CD-470A-BC10-B8609D7E509D";
+                if(TextUtils.isEmpty(nombre)) {
+                    nombreForm.setError("El campo nombre no puede estar vacio");
+                    return;
+                }
 
-              if(TextUtils.isEmpty(tel)) {
-                  telefonoForm.setError("El campo Teléfono no puede estar vacio");
-                  return;
-              }
+                if(TextUtils.isEmpty(tel)) {
+                    telefonoForm.setError("El campo Teléfono no puede estar vacio");
+                    return;
+                }
 
-              if(TextUtils.isEmpty(code)) {
-                  codeForm.setError("El campo Código de seguridad no puede estar vacio");
-                  return;
-              }
-
-
+                if(TextUtils.isEmpty(code)) {
+                    codeForm.setError("El campo Código de seguridad no puede estar vacio");
+                    return;
+                }
 
 
-                  crearXML xml1 = new crearXML(nombre,licencia, finalSha256,code,tel);
-              
+
+
+                crearXML xml1 = new crearXML(nombre,licencia, finalSha256,code,tel);
+
 //Clase asíncrona para la conexión con la API
-                  class AsyncT extends AsyncTask<Void,Void,Void>{
+                class AsyncT extends AsyncTask<Void,Void,Void>{
 
-                      @Override
-                      public Void doInBackground(Void... params) {
-
-
-                          xml1.getXMLRegister();
-                          try {
-                              xml1.httpsRequest(xml1.getXMLRegister().toString());
-                              //Alterar la vista en una asyncTask
-                              runOnUiThread(new Runnable() {
-                                  @Override
-                                  public void run() {
-
-                                      // Stuff that updates the UI
-                                      String respuestaAPI = xml1.getRespuesta();
-                                      System.out.println(respuestaAPI);
-
-                                      xml1.registro(respuestaAPI);
-                                      String respuestaParseada = xml1.getRespuestaParseada();
+                    @Override
+                    public Void doInBackground(Void... params) {
 
 
+                        xml1.getXMLRegister();
+                        try {
+                            xml1.httpsRequest(xml1.getXMLRegister().toString());
+                            //Alterar la vista en una asyncTask
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
 
-                                     Toast toast = Toast.makeText(getApplicationContext(), respuestaParseada, Toast.LENGTH_LONG);
-                                     toast.show();
-                                  }
-                              });
-
-                          } catch (IOException e) {
-                              e.printStackTrace();
-                          }
+                                    // Stuff that updates the UI
+                                    String respuestaAPI = xml1.getRespuesta();
 
 
-                          return null;
-                      }
+                                    xml1.registro(respuestaAPI);
+                                    String respuestaParseada = xml1.getRespuestaParseada();
 
 
 
-                  }
-                  AsyncT asyncT = new AsyncT();
-                  asyncT.execute();
+                                    String codeError = xml1.CodeRegistro(respuestaAPI);
+                                    int codeErrorParseado = Integer.parseInt (codeError);
+                                    System.out.println("Codigo de error : "+codeError);
+
+                                    Toast toast = Toast.makeText(getApplicationContext(), respuestaParseada, Toast.LENGTH_LONG);
+                                    toast.show();
+
+                                    if (codeErrorParseado == 1){//1 Significa que se ha registrado con éxito
+                                        System.out.println("El registro funciona");
+
+                                    }
+                                    else{System.out.println("Hay un problema con el registro");
+                                          /*sleep(4000);
+                                          Intent intent = new Intent(view.getContext(), MainActivity.class);
+                                          startActivityForResult(intent, 0);*/
+                                    }
+
+
+                                }
+                            });
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+
+                        return null;
+                    }
+
+
+
+                }
+                AsyncT asyncT = new AsyncT();
+                asyncT.execute();
 
 
 
 
 
-          }});
+            }});
 
 
 

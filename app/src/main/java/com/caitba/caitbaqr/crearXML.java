@@ -32,7 +32,7 @@ public class crearXML {
     private String respuesta;
 
     private String RespuestaParseada;
-    private int ErrorParseado;
+    private String ErrorParseado;
 
     public crearXML(String nombre, String licencia, String device_ID, String code, String telefono) {
         super();
@@ -67,6 +67,9 @@ public class crearXML {
     public String getLicencia() {
         return licencia;
     }
+    public String getErrorParseado() {
+        return ErrorParseado;
+    }
     public void setLicencia(String licencia) {
         this.licencia = licencia;
     }
@@ -87,7 +90,7 @@ public class crearXML {
         return respuesta;
     }
 
-public String getRespuestaParseada(){return RespuestaParseada;}
+    public String getRespuestaParseada(){return RespuestaParseada;}
 
     public StringBuffer getXMLRegister () {
 
@@ -320,7 +323,7 @@ public String getRespuestaParseada(){return RespuestaParseada;}
             System.out.println("  Estado : " + getCharacterDataFromElement(line4));
 
 
-             RespuestaParseada =
+            RespuestaParseada =
                     "Nombre: " + getCharacterDataFromElement(line1)+"\n"+
                             " "+
                             "Fecha desde: " + getCharacterDataFromElement(line)+"\n"+
@@ -330,7 +333,7 @@ public String getRespuestaParseada(){return RespuestaParseada;}
                             "Perfil de accceso: " + getCharacterDataFromElement(line3)+"\n"+
                             " "+
                             "Estado : " + getCharacterDataFromElement(line4)
-                    ;
+            ;
 
 
 
@@ -390,7 +393,7 @@ public String getRespuestaParseada(){return RespuestaParseada;}
     }
 
 
-    public int CodeRegistro(String respuesta){
+    public String CodeRegistro(String respuesta){
         DocumentBuilder db = null;
         try {
             db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -409,10 +412,9 @@ public String getRespuestaParseada(){return RespuestaParseada;}
             e.printStackTrace();
         }
 
-        System.out.println("Root element: " + doc.getDocumentElement().getNodeName()); //Mostramos el elemento root.
         NodeList nodes = doc.getElementsByTagName("error");
 
-        System.out.println(" ");
+
         for (int i = 0; i < nodes.getLength(); i++) {
             Element element = (Element) nodes.item(i);
 
@@ -421,21 +423,16 @@ public String getRespuestaParseada(){return RespuestaParseada;}
 
 
 
-
-
-            System.out.println("Code: " + getCharacterDataFromElement(line1));
-
-
-
             ErrorParseado =
-                    Integer.parseInt(getCharacterDataFromElement(line1)+"\n")
+                    getCharacterDataFromElement(line1);
             ;
-
+            System.out.println(ErrorParseado);
+            System.out.println(respuesta);
 
 
         }
 
-        return ErrorParseado;
+        return (ErrorParseado);
 
     }
 
@@ -449,7 +446,7 @@ public String getRespuestaParseada(){return RespuestaParseada;}
         return "";
     }
 
-    }
+}
 
 
 

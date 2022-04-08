@@ -26,55 +26,56 @@ public class activity_location extends AppCompatActivity {
 
         String deviceID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
 
-                //Clase asíncrona para la conexión con la API
-                class AsyncT extends AsyncTask<Void,Void,Void> {
+        //Clase asíncrona para la conexión con la API
+        class AsyncT extends AsyncTask<Void,Void,Void> {
 
-                    @Override
-                    public Void doInBackground(Void... params) {
+            @Override
+            public Void doInBackground(Void... params) {
 
-                        crearXML xml1 = new crearXML(deviceID);
+                crearXML xml1 = new crearXML(deviceID);
 
-                        xml1.getXMLLoad();
-                        try {
-                            xml1.httpsRequest(xml1.getXMLLoad().toString());
+                xml1.getXMLLoad();
+                try {
+                    xml1.httpsRequest(xml1.getXMLLoad().toString());
 
-                            //Alterar la vista en una asyncTask
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
+                    //Alterar la vista en una asyncTask
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
 
-                                    // Alteramos la vista (UI)
+                            // Alteramos la vista (UI)
 
-                                    String respuestaAPI = xml1.getRespuesta();
-                                    xml1.ubicaciones(respuestaAPI);
-                                    String respuestaParseada = xml1.getRespuestaParseada();
-
-
-
-                                    TextView respuesta = findViewById(R.id.respuesta);
+                            String respuestaAPI = xml1.getRespuesta();
+                            xml1.ubicaciones(respuestaAPI);
+                            String respuestaParseada = xml1.getRespuestaParseada();
 
 
 
+                            TextView respuesta = findViewById(R.id.respuesta);
 
-                                    respuesta.setText(respuestaParseada);
-                              ;
-                                }
-                            });
 
-                        } catch (IOException e) {
-                            e.printStackTrace();
+
+
+                            respuesta.setText(respuestaParseada);
+                            System.out.println("resp"+respuestaParseada);
+                            ;
                         }
+                    });
 
-
-                        return null;
-                    }
-
-
-
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
 
-                AsyncT asyncT = new AsyncT();
-                asyncT.execute();
+
+                return null;
+            }
+
+
+
+        }
+
+        AsyncT asyncT = new AsyncT();
+        asyncT.execute();
 
         //Volver al main_activity
         Button volver = findViewById(R.id.volver);

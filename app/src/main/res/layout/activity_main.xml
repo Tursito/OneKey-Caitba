@@ -34,9 +34,42 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:gravity="center"/>
+            <!--android:adjustViewBounds="true"
+                        Para hacer el QR más grande-->
 
-              <!--android:adjustViewBounds="true"
-               Para hacer el QR más grande-->
+            <TextView
+                android:id="@+id/hora"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="40sp"
+                 />
+
+<!--
+            <EditText
+                android:id="@+id/milis"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/et_custom"
+                android:fontFamily="@font/roboto_regular"
+                android:hint="milis"
+                android:inputType="textEmailAddress"
+                android:padding="15dp"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/enviarMilis"
+                android:layout_width="179dp"
+                android:layout_height="67dp"
+                android:layout_gravity="center"
+                android:text="Enviar" />
+-->
+
 
 
 

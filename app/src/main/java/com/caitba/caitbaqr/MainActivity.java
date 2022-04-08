@@ -14,6 +14,7 @@ import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 
 import androidx.annotation.NonNull;
@@ -27,13 +28,16 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 import java.text.SimpleDateFormat;
 
 import java.util.Date;
-import java.util.Locale;
+
 
 
 public class MainActivity extends AppCompatActivity {
 
 
     String deviceID;
+    String milis = "1000";
+    int cnt = 30;
+    boolean inf = true;
 
     String fSalt = "kdsjh/8sdjhsdjhsd";
     private static final String SECRET_KEY = "NJ3rjs8nfJD67nmcJdNS78d9";
@@ -46,10 +50,6 @@ public class MainActivity extends AppCompatActivity {
         //Recogemos el AID (solo una vez)
         deviceID = Settings.Secure.getString(this.getContentResolver(),Settings.Secure.ANDROID_ID);
 
-    System.out.println("device"+deviceID);
-
-
-
         //Creamos el hilo y le asignamos una clase.
         //Este hilo se usa para el QR.
         Thread myThread = null;
@@ -57,17 +57,16 @@ public class MainActivity extends AppCompatActivity {
         myThread= new Thread(runnable);
         myThread.start();
 
-    }
 
+
+
+    }
+    //Menú
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
-
-    private void getMenuInflater(int main_menu, Menu menu) {
-    }
-
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -97,51 +96,72 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    //En el hilo estaremos actualizando la fecha y hora constantemente, al hacer esto
-    //La imagen QR también se actualiza
+
+    /*En el hilo estaremos actualizando la fecha y hora constantemente,
+     al hacer esto la imagen QR también se actualiza*/
     public void doWork() {
         runOnUiThread(new Runnable() {
 
             @RequiresApi(api = Build.VERSION_CODES.O)
             public void run() {
+
+
+                if (cnt >4){
+
+                    try {
+
+                        Utils utils = new Utils();
+                        //Fecha y hora
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd HHmmss"), Locale,getDefault;
+                        Date date = new Date();
+                        String fecha = dateFormat.format(date);
+
+                        //QR
+                        ImageView imgQr = findViewById(R.id.qrCode);
+                        BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+
+
+                        String deviceIDSHA = getSHA256(deviceID).toUpperCase();
+
+                        String trama =deviceIDSHA.toString()+" "+fecha.toString();//String a encriptar
+
+                        String tramaEncriptada = utils.encrypt(SECRET_KEY, fSalt, trama);
+
+                        //String qrDesencriptado = utils.decrypt(SECRET_KEY, fSalt, tramaEncriptada);
+
+                        Bitmap bitmap = barcodeEncoder.encodeBitmap(tramaEncriptada, BarcodeFormat.QR_CODE, 600, 600);// mapa QR
+                        imgQr.setImageBitmap(bitmap);//Creamos el QR
+                    }
+                    catch(Exception e) {
+                        e.printStackTrace();
+                    }
+                    cnt = 0;
+
+                }
+
                 try{
-                    Utils utils = new Utils();
-                    //Fecha y hora
-                    
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd hhmmss"), Locale,getDefault;
-                    Date date = new Date();
-                    String fecha = dateFormat.format(date);
+                    //Fecha y hora para el usuario
+                    SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd-MM-yyyy HH-mm-ss");
+                    Date date1 = new Date();
+                    String fecha1 = dateFormat1.format(date1);
 
+                    TextView t =findViewById(R.id.hora);
+                    t.setText(fecha1);
+                    cnt +=1;
 
-                    //QR
-                    ImageView imgQr = findViewById(R.id.qrCode);
-                    BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-
-                    String deviceIDSHA = getSHA256(deviceID).toUpperCase();
-                    System.out.println("deviceSHA "+deviceIDSHA);
-
-
-
-                    String trama =deviceIDSHA.toString()+" "+fecha.toString();//String a encriptar
-
-
-                    String tramaEncriptada = utils.encrypt(SECRET_KEY, fSalt, trama);
-
-                    String qrDesencriptado = utils.decrypt(SECRET_KEY, fSalt, tramaEncriptada);
-
-
-
-                   // String qrDesencriptado = utils.getAESDecrypt(tramaEncriptada);//Desencriptado
-                    Bitmap bitmap = barcodeEncoder.encodeBitmap(tramaEncriptada, BarcodeFormat.QR_CODE, 600, 600);// mapa QR
-                    imgQr.setImageBitmap(bitmap);//Creamos el QR
-
-
-
-                }catch (Exception e) {}
             }
+
+
+
+
+
         });
     }
+
 
     //Clase para activar el código de arriba, cuando se ejecuta espera X milisegundos
     //Y la vuelve a ejecutar hasta interrumpir el hilo
@@ -151,7 +171,8 @@ public class MainActivity extends AppCompatActivity {
             while(!Thread.currentThread().isInterrupted()){
                 try {
                     doWork();
-                    Thread.sleep(3000);//Cada 5 segundos recarga el QR.
+                    Thread.sleep(Long.parseLong(milis));//Cada x segundos recarga el QR.
+                    cnt+=1;
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }catch(Exception e){
@@ -159,5 +180,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+
+
 
 }
