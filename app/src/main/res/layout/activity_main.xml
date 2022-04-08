@@ -44,7 +44,7 @@
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
                 android:fontFamily="@font/roboto_regular"
-                android:textSize="40sp"
+                android:textSize="15sp"
                  />
 
 <!--
