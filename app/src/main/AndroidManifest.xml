@@ -24,6 +24,12 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
         <activity
+            android:name=".registroNotOK"
+            android:exported="false" />
+        <activity
+            android:name=".registroOK"
+            android:exported="false" />
+        <activity
             android:name=".acercaDe"
             android:exported="false" />
         <activity

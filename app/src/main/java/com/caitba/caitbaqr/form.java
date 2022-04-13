@@ -120,12 +120,14 @@ public class form extends AppCompatActivity {
 
                                     if (codeErrorParseado == 1){//1 Significa que se ha registrado con éxito
                                         System.out.println("El registro funciona");
-
+                                        Intent intent = new Intent(view.getContext(), registroOK.class);
+                                        startActivityForResult(intent, 0);
                                     }
+
                                     else{System.out.println("Hay un problema con el registro");
-                                          /*sleep(4000);
-                                          Intent intent = new Intent(view.getContext(), MainActivity.class);
-                                          startActivityForResult(intent, 0);*/
+
+                                          Intent intent = new Intent(view.getContext(), registroNotOK.class);
+                                          startActivityForResult(intent, 0);
                                     }
 
 

@@ -13,6 +13,8 @@
         <entry key="app/src/main/res/layout/activity_location.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.2578125" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_registro_not_ok.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_registro_ok.xml" value="0.1" />
         <entry key="app/src/main/res/layout/form.xml" value="0.1" />
         <entry key="app/src/main/res/menu/main_menu.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.4326171875" />
