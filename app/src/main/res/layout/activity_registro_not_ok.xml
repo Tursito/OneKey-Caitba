@@ -30,10 +30,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=" El registro no se ha realizado correctamente.."
+                android:text=" El registro no se ha realizado correctamente"
                 android:padding="15dp"
                 android:fontFamily="@font/roboto_regular"
-                android:textSize="40sp"
+                android:textSize="30sp"
+                android:textAlignment="center"
                 />
 
 

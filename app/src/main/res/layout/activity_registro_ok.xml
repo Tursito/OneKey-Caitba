@@ -33,7 +33,8 @@
                 android:text="El registro se ha realizado correctamente"
                 android:padding="15dp"
                 android:fontFamily="@font/roboto_regular"
-                android:textSize="35sp"
+                android:textAlignment="center"
+                android:textSize="30sp"
                 />
 
 
