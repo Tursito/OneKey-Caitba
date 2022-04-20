@@ -15,8 +15,8 @@ public class acercaDe extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acerca_de);
 
-        String ver ="Versión 1.1";
-        String nombreEmpresa ="CAITBA";
+        String ver = "Versión 1.1";
+        String nombreEmpresa = "CAITBA";
         String mailEmpresa = "comercial@caitba.com";
 
         TextView Empresa = findViewById(R.id.nombreEmpresa);
