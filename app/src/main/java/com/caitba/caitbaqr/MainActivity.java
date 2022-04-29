@@ -67,14 +67,16 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
-
+    @Override public void onBackPressed() { return; }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.config:
-                //Ir a la actividad de form.class
+            case R.id.registrarUbi:
+                //Ir al form.class
+
                 Intent myIntent = new Intent(getApplicationContext(), form.class);
                 startActivityForResult(myIntent, 0);
+
                 return true;
             case R.id.ubi:
                 //Ir a activity_location.class
@@ -84,12 +86,21 @@ public class MainActivity extends AppCompatActivity {
 
                 return true;
             case R.id.acercaDe:
-                //Ir a activity_location.class
+                //Ir a acercaDe.class
 
                 Intent myIntent2 = new Intent(getApplicationContext(), acercaDe.class);
                 startActivityForResult(myIntent2, 0);
 
                 return true;
+
+            case R.id.cerrarSesion:
+                //Ir al Login.class
+
+                Intent myIntent3 = new Intent(getApplicationContext(), Login.class);
+                startActivityForResult(myIntent3, 0);
+
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

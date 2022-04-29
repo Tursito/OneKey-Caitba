@@ -85,6 +85,7 @@ public class form extends AppCompatActivity {
 
 
 
+
                 crearXML xml1 = new crearXML(nombre,licencia, finalSha256,code,tel);
 
 //Clase asíncrona para la conexión con la API
