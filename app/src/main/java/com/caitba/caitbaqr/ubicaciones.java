@@ -1,27 +1,24 @@
 package com.caitba.caitbaqr;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.res.ResourcesCompat;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 
 
 import java.io.IOException;
 
-public class activity_location extends AppCompatActivity {
+public class ubicaciones extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_location);
+        setContentView(R.layout.activity_localizaciones);
 
 
         String deviceID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
@@ -32,7 +29,7 @@ public class activity_location extends AppCompatActivity {
             @Override
             public Void doInBackground(Void... params) {
 
-                crearXML xml1 = new crearXML(deviceID);
+                XML xml1 = new XML(deviceID);
 
                 xml1.getXMLLoad();
                 try {
@@ -57,7 +54,7 @@ public class activity_location extends AppCompatActivity {
 
 
                             respuesta.setText(respuestaParseada);
-                            System.out.println("resp"+respuestaParseada);
+                            System.out.println("resp "+respuestaParseada);
                             ;
                         }
                     });

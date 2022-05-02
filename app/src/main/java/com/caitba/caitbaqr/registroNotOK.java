@@ -19,7 +19,7 @@ public class registroNotOK extends AppCompatActivity {
         volver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), Register.class);
+                Intent intent = new Intent(view.getContext(), registro_usuario.class);
                 startActivityForResult(intent, 0);
             }
         });

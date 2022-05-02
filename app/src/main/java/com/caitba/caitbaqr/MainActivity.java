@@ -3,7 +3,7 @@ package com.caitba.caitbaqr;
 
 
 
-import static com.caitba.caitbaqr.form.getSHA256;
+import static com.caitba.caitbaqr.registro_ubicaciones.getSHA256;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -74,14 +74,14 @@ public class MainActivity extends AppCompatActivity {
             case R.id.registrarUbi:
                 //Ir al form.class
 
-                Intent myIntent = new Intent(getApplicationContext(), form.class);
+                Intent myIntent = new Intent(getApplicationContext(), registro_ubicaciones.class);
                 startActivityForResult(myIntent, 0);
 
                 return true;
             case R.id.ubi:
                 //Ir a activity_location.class
 
-                Intent myIntent1 = new Intent(getApplicationContext(), activity_location.class);
+                Intent myIntent1 = new Intent(getApplicationContext(), ubicaciones.class);
                 startActivityForResult(myIntent1, 0);
 
                 return true;
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.cerrarSesion:
                 //Ir al Login.class
 
-                Intent myIntent3 = new Intent(getApplicationContext(), Login.class);
+                Intent myIntent3 = new Intent(getApplicationContext(), login_usuario.class);
                 startActivityForResult(myIntent3, 0);
 
                 return true;
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
 
                     try {
 
-                        Utils utils = new Utils();
+                        sha256 sha256 = new sha256();
                         //Fecha y hora
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd HHmmss"), Locale,getDefault;
                         Date date = new Date();
@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
 
                         String trama =deviceIDSHA.toString()+" "+fecha.toString();//String a encriptar
 
-                        String tramaEncriptada = utils.encrypt(SECRET_KEY, fSalt, trama);
+                        String tramaEncriptada = sha256.encrypt(SECRET_KEY, fSalt, trama);
 
                         //String qrDesencriptado = utils.decrypt(SECRET_KEY, fSalt, tramaEncriptada);
 

@@ -6,14 +6,15 @@
         android:id="@+id/ubi"
         android:title="Ubicaciones" ></item>
 
-    <item
-        android:id="@+id/acercaDe"
-        android:title="Acerca De" ></item>
+
 
     <item
         android:id="@+id/registrarUbi"
         android:title="Registrar Ubicación" ></item>
 
+    <item
+        android:id="@+id/acercaDe"
+        android:title="Acerca De" ></item>
     <item
         android:id="@+id/cerrarSesion"
         android:title="Cerrar sesión" ></item>

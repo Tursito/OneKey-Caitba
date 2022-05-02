@@ -8,20 +8,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.util.Scanner;
 
-public class Login extends AppCompatActivity {
+public class login_usuario extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_usuario);
         //Enviar información
         Button enviar = findViewById(R.id.enviar);
 
@@ -64,7 +62,7 @@ public class Login extends AppCompatActivity {
         registro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), Register.class);
+                Intent intent = new Intent(view.getContext(), registro_usuario.class);
                 startActivityForResult(intent, 0);
             }
         });

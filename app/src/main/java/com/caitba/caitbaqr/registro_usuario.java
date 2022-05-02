@@ -10,7 +10,6 @@ package com.caitba.caitbaqr;
 
 
         import android.content.Intent;
-        import android.os.AsyncTask;
         import android.os.Bundle;
 
         import android.provider.Settings;
@@ -20,25 +19,23 @@ package com.caitba.caitbaqr;
         import android.widget.Button;
         import android.widget.EditText;
         import android.widget.RelativeLayout;
-        import android.widget.Toast;
 
 
         import java.io.BufferedWriter;
         import java.io.File;
         import java.io.FileWriter;
-        import java.io.IOException;
         import java.math.BigInteger;
         import java.security.MessageDigest;
 
 
-public class Register extends AppCompatActivity {
+public class registro_usuario extends AppCompatActivity {
 
     RelativeLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_registro_usuario);
 
 
         String deviceID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
@@ -99,7 +96,7 @@ public class Register extends AppCompatActivity {
         volver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), Login.class);
+                Intent intent = new Intent(view.getContext(), login_usuario.class);
                 startActivityForResult(intent, 0);
             }
         });

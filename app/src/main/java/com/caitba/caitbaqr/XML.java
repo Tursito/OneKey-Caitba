@@ -23,7 +23,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-public class crearXML {
+public class XML {
     private String nombre;
     private String licencia;
     private String Device_ID;
@@ -34,7 +34,7 @@ public class crearXML {
     private String RespuestaParseada;
     private String ErrorParseado;
 
-    public crearXML(String nombre, String licencia, String device_ID, String code, String telefono) {
+    public XML(String nombre, String licencia, String device_ID, String code, String telefono) {
         super();
         this.nombre = nombre;
         this.licencia = licencia;
@@ -43,13 +43,13 @@ public class crearXML {
         this.telefono = telefono;
     }
 
-    public crearXML(String device_ID){
+    public XML(String device_ID){
         super();
         Device_ID = device_ID;
     }
 
 
-    public crearXML() {
+    public XML() {
         super();
 
     }
@@ -300,7 +300,7 @@ public class crearXML {
         System.out.println(" ");
         for (int i = 0; i < nodes.getLength(); i++) {
             Element element = (Element) nodes.item(i);
-
+System.out.println("Nodos"+ nodes.getLength());
             NodeList name = element.getElementsByTagName("name");
             Element line1 = (Element) name.item(0);
 

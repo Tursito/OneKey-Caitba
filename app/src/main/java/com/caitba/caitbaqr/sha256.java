@@ -28,7 +28,7 @@ import java.util.Arrays;
 
 
 
-public class Utils {
+public class sha256 {
 
     private static final String FACTORY_INSTANCE = "PBKDF2WithHmacSHA256";
     private static final String ALGORITHM = "AES/CBC/PKCS5PADDING";

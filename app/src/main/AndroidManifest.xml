@@ -31,7 +31,7 @@
             android:name=".advertencia_volver_registro"
             android:exported="false" />
         <activity
-            android:name=".Login"
+            android:name=".login_usuario"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,7 +40,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Register"
+            android:name=".registro_usuario"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -58,7 +58,7 @@
             android:name=".acercaDe"
             android:exported="false" />
         <activity
-            android:name=".activity_location"
+            android:name=".ubicaciones"
             android:exported="false" />
 
         <uses-library
@@ -66,7 +66,7 @@
             android:required="false" />
 
         <activity
-            android:name=".form"
+            android:name=".registro_ubicaciones"
             android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />

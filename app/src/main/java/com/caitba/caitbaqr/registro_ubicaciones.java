@@ -2,8 +2,6 @@ package com.caitba.caitbaqr;
 
 
 
-import static android.os.SystemClock.sleep;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -18,7 +16,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -29,14 +26,14 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 
 
-public class form extends AppCompatActivity {
+public class registro_ubicaciones extends AppCompatActivity {
 
     RelativeLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_form2);
+        setContentView(R.layout.activity_registro_ubicaciones);
 
 
         String deviceID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
@@ -86,7 +83,7 @@ public class form extends AppCompatActivity {
 
 
 
-                crearXML xml1 = new crearXML(nombre,licencia, finalSha256,code,tel);
+                XML xml1 = new XML(nombre,licencia, finalSha256,code,tel);
 
 //Clase asíncrona para la conexión con la API
                 class AsyncT extends AsyncTask<Void,Void,Void>{
